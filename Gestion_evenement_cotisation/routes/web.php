@@ -1,7 +1,9 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\AssociationSessionController;
+use App\Http\Controllers\Auth\RegisteredAssociationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +29,18 @@ Route::get('/about', function () {
     return view('About');
 });
 
-// Route::get('association/dashboard', function () {
-//     return view('Clients.dashboard');
-// })->middleware(['client'])->name('dashboard');
+Route::get('loginEntreprise', [AssociationSessionController::class, 'create'])
+    ->name('loginEntreprise');
+Route::post('loginEntreprises', [AssociationSessionController::class, 'store'])
+    ->name('loginEntreprises');
+
+Route::get('registerEntreprise', [RegisteredAssociationController::class, 'create'])
+    ->name('Entrepriseregister');
+Route::post('registerEntreprises', [RegisteredAssociationController::class, 'store'])
+    ->name('Entrepriseregisters');
+Route::get('/dashboard/association', function () {
+    return view('Company.dashboard');
+})->middleware('auth:association');
 
 Route::middleware('client')->group(function () {
     Route::get('dashboard', function () {

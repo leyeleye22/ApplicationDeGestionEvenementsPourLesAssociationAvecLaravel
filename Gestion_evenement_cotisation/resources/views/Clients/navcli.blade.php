@@ -37,7 +37,7 @@
                 <nav :class="{ 'flex': open, 'hidden': !open }"
                     class="flex-col flex-grow hidden pb-4 md:pb-0 md:flex md:justify-end md:flex-row">
                     <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg light-mode:bg-transparent light-mode:hover:bg-white-600 light-mode:focus:bg-white-600 dark-mode:focus:text-white dark-mode:hover:text-white light-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-white hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
-                        href="#">Acceuil</a>
+                        href="/dashboard">Acceuil</a>
                     <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg light-mode:bg-transparent light-mode:hover:bg-white-600 light-mode:focus:bg-white-600 dark-mode:focus:text-white dark-mode:hover:text-white light-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-white hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                         href="/client/events">Evenement</a>
                     <a class="px-4 py-2 mt-2 text-sm font-semibold bg-transparent rounded-lg light-mode:bg-transparent light-mode:hover:bg-white-600 light-mode:focus:bg-white-600 dark-mode:focus:text-white dark-mode:hover:text-white light-mode:text-gray-200 md:mt-0 md:ml-4 hover:text-gray-900 focus:text-white hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
