@@ -41,14 +41,17 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         // dd($request);
-        $file = $request->file('leye')->store('images', 'public');
+        $imageName = time() . '.' . $request->leye->extension();
+
+        $request->image->move(public_path('images'), $imageName);
+
 
 
 
         $user = User::create([
             'name' => $request->name,
             'lastname' => $request->lastname,
-            'photo' => $file,
+            'photo' => $imageName,
             'email' => strtolower($request->email),
             'telephone' => $request->telephone,
             'role' => 'user',

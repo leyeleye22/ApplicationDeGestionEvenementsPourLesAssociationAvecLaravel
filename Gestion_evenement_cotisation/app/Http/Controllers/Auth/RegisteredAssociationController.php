@@ -42,8 +42,9 @@ class RegisteredAssociationController extends Controller
             'password' => ['required', Rules\Password::defaults()],
         ]);
 
-        $file = $request->file('logo')->store('images', 'public');
+        $imageName = time() . '.' . $request->logo->extension();
 
+        $request->logo->move(public_path('images'), $imageName);
 
 
         $association = Association::create([
@@ -51,7 +52,7 @@ class RegisteredAssociationController extends Controller
             'login' => $request->login,
             'datecreated' => $request->created,
             'slogan' => $request->slogan,
-            'logo' => $file,
+            'logo' => $imageName,
             'password' => Hash::make($request->password),
         ]);
         event(new Registered($association));

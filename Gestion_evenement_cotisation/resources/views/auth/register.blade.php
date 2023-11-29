@@ -109,7 +109,7 @@
             <p class="mt-10 text-center text-sm text-gray-500">
                 Create your Organisation?
                 <a href="{{ route('Entrepriseregister') }}"
-                    class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Sign in</a>
+                    class="font-semibold leading-6 text-indigo-600 hover:text-indigo-500">Create Organisation</a>
             </p>
 
         </div>

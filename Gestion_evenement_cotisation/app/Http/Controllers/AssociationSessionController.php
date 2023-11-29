@@ -19,9 +19,7 @@ class AssociationSessionController extends Controller
             'password' => ['required'],
         ]);
         if (Auth::guard('association')->attempt($credentials)) {
-            // dd('leye est cool');
             $request->session()->regenerate();
-
             return redirect()->intended('dashboard/association');
         } else {
             dd('ok');

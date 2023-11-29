@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\AssociationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AssociationSessionController;
 use App\Http\Controllers\Auth\RegisteredAssociationController;
+use App\Http\Controllers\EvenementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,14 +35,27 @@ Route::get('loginEntreprise', [AssociationSessionController::class, 'create'])
     ->name('loginEntreprise');
 Route::post('loginEntreprises', [AssociationSessionController::class, 'store'])
     ->name('loginEntreprises');
-
 Route::get('registerEntreprise', [RegisteredAssociationController::class, 'create'])
     ->name('Entrepriseregister');
 Route::post('registerEntreprises', [RegisteredAssociationController::class, 'store'])
     ->name('Entrepriseregisters');
-Route::get('/dashboard/association', function () {
-    return view('Company.dashboard');
-})->middleware('auth:association');
+Route::middleware('auth:association')->group(function () {
+   
+    Route::post('/send/even', [EvenementController::class, 'edit']);
+    Route::get('/delete/{id}', [EvenementController::class, 'index']);
+    Route::get('/update/{id}', [EvenementController::class, 'update']);
+    Route::get('/viewmore/{id}', [EvenementController::class, 'create']);
+    Route::get('/dashboard/association', [AssociationController::class, 'create']);
+    Route::get('/create/events', function () {
+        return view('Company.Events');
+    });
+    Route::get('/dash', function () {
+        return redirect('/dashboard/association');
+    });
+
+    Route::post('/EventCreated', [AssociationController::class, 'store']);
+});
+
 
 Route::middleware('client')->group(function () {
     Route::get('dashboard', function () {
