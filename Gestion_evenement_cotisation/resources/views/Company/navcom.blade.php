@@ -23,7 +23,7 @@
             <!-- Nav Links -->
             <ul class="hidden md:flex px-4 mx-auto font-semibold font-heading space-x-12">
                 <li><a class="hover:text-gray-200" href="#">Home</a></li>
-                <li><a class="hover:text-gray-200" href="#">Events</a></li>
+                <li><a class="hover:text-gray-200" href="/viewreservation">Reservations</a></li>
                 <li><a class="hover:text-gray-200" href="/create/events">Create_Events</a></li>
                 <li><a class="hover:text-gray-200" href="#"></a></li>
             </ul>

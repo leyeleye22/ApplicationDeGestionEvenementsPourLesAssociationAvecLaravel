@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Evenement;
 use App\Models\Association;
 use Illuminate\Http\Request;
+use App\Notifications\MailEven;
 use App\Http\Requests\StoreAssociationRequest;
 use App\Http\Requests\UpdateAssociationRequest;
 
@@ -34,6 +36,7 @@ class AssociationController extends Controller
     public function store(Request $request)
     {
         $evens = new Evenement();
+        $users = User::all();
         $request->validate([
             'eventitle' => 'required|string|max:255',
             'desceven' => 'required|string|max:500',
@@ -55,6 +58,9 @@ class AssociationController extends Controller
         $evens->clotured = 'isnotclotured';
         $evens->date_evenement = $request->dateeven;
         if ($evens->save()) {
+            foreach ($users as $user) {
+                $user->notify(new MailEven());
+            }
             return redirect('/dashboard/association');
         } else {
             return redirect('create/events');

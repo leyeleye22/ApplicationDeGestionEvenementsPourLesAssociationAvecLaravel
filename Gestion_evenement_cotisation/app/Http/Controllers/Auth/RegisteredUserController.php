@@ -37,13 +37,13 @@ class RegisteredUserController extends Controller
             'lastname' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
             'telephone' => ['required', 'string', 'max:255', 'unique:users,telephone'],
-            'leye' => ['required'],
+            'leye' => ['required', 'image'],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         // dd($request);
         $imageName = time() . '.' . $request->leye->extension();
 
-        $request->image->move(public_path('images'), $imageName);
+        $request->leye->move(public_path('images'), $imageName);
 
 
 

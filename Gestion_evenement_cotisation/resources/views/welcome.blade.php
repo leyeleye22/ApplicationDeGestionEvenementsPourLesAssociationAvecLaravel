@@ -36,56 +36,36 @@
 
     <div class="bg-gray-100">
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32">
-                <h2 class="text-2xl font-bold text-gray-900">Collections</h2>
+            <div class="mx-auto max-w-2xl py-16 sm:py-24 lg:max-w-none lg:py-32>
+                <h2 class="text-4xl
+                font-bold text-gray-900">Collections</h2>
+                @php
+                    $firstThreeEvens = $evens->take(3);
+                @endphp
 
-                <div class="mt-6 space-y-12 lg:grid lg:grid-cols-3 lg:gap-x-6 lg:space-y-0">
-                    <div class="group relative">
+                <div class="flex flex-wrap -mx-2 overflow-hidden sm:-mx-2 md:-mx-2 lg:-mx-2 xl:-mx-2">
+                    @foreach ($firstThreeEvens as $even)
                         <div
-                            class="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
-                            <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-edition-01.jpg"
-                                alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug."
-                                class="h-full w-full object-cover object-center">
+                            class="my-2 px-2 w-full overflow-hidden sm:my-2 sm:px-2 sm:w-1/2 md:my-2 md:px-2 md:w-1/2 lg:my-2 lg:px-2 lg:w-1/3 xl:my-2 xl:px-2 xl:w-1/3">
+                            <div class="group relative">
+                                <div
+                                    class="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
+                                    <img src="{{ asset('images/' . $even->image) }}"
+                                        alt="Desk with leather desk pad, walnut desk organizer, wireless keyboard and mouse, and porcelain mug."
+                                        class="h-full w-full object-cover object-center">
+                                </div>
+                                <h3 class="mt-6 text-sm text-gray-500">
+                                    <a href="#">
+                                        <span class="absolute inset-0"></span>
+                                        {{ $even->libelle }}
+                                    </a>
+                                </h3>
+                                <p class="text-base font-semibold text-gray-900">{{ $even->description }}</p>
+                            </div>
                         </div>
-                        <h3 class="mt-6 text-sm text-gray-500">
-                            <a href="#">
-                                <span class="absolute inset-0"></span>
-                                Desk and Office
-                            </a>
-                        </h3>
-                        <p class="text-base font-semibold text-gray-900">Work from home accessories</p>
-                    </div>
-                    <div class="group relative">
-                        <div
-                            class="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
-                            <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-edition-02.jpg"
-                                alt="Wood table with porcelain mug, leather journal, brass pen, leather key ring, and a houseplant."
-                                class="h-full w-full object-cover object-center">
-                        </div>
-                        <h3 class="mt-6 text-sm text-gray-500">
-                            <a href="#">
-                                <span class="absolute inset-0"></span>
-                                Self-Improvement
-                            </a>
-                        </h3>
-                        <p class="text-base font-semibold text-gray-900">Journals and note-taking</p>
-                    </div>
-                    <div class="group relative">
-                        <div
-                            class="relative h-80 w-full overflow-hidden rounded-lg bg-white sm:aspect-h-1 sm:aspect-w-2 lg:aspect-h-1 lg:aspect-w-1 group-hover:opacity-75 sm:h-64">
-                            <img src="https://tailwindui.com/img/ecommerce-images/home-page-02-edition-03.jpg"
-                                alt="Collection of four insulated travel bottles on wooden shelf."
-                                class="h-full w-full object-cover object-center">
-                        </div>
-                        <h3 class="mt-6 text-sm text-gray-500">
-                            <a href="#">
-                                <span class="absolute inset-0"></span>
-                                Travel
-                            </a>
-                        </h3>
-                        <p class="text-base font-semibold text-gray-900">Daily commute essentials</p>
-                    </div>
+                    @endforeach
                 </div>
+
             </div>
         </div>
     </div>

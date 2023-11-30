@@ -2,8 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Evenement;
+use App\Models\Reservation;
+use function Ramsey\Uuid\v1;
+
 use Illuminate\Http\Request;
+use App\Notifications\MailRefused;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreEvenementRequest;
 use App\Http\Requests\UpdateEvenementRequest;
 
@@ -43,10 +49,7 @@ class EvenementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Evenement $evenement)
-    {
-        //
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -83,6 +86,20 @@ class EvenementController extends Controller
             return redirect('/dashboard/association');
         }
     }
+    public function view()
+    {
+        $events = Evenement::where('association_id', Auth::guard('association')->user()->id)->get();
+        return view('Company.reservations', compact('events'));
+    }
+    public function show($id)
+    {
+        $evenement = Evenement::findOrFail($id);
+        $reservations = Reservation::where('evenement_id', $evenement->id)->get();
+        $user_ids = $reservations->pluck('user_id');
+        $users = User::whereIn('id', $user_ids)->get();
+        // dd($users);
+        return view('Company.userreservations', compact('evenement', 'users', 'reservations'));
+    }
 
     /**
      * Update the specified resource in storage.
@@ -96,8 +113,23 @@ class EvenementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Evenement $evenement)
+    public function delete($iduser, $reservation)
     {
-        //
+        $reservations = Reservation::where('id', $reservation)->where('user_id', $iduser)->firstOrFail();
+        if ($reservations->accepted == 'isnotacpeted') {
+            $reservations->accepted = 'isaccepted';
+
+        } else {
+            $reservations->accepted = 'isnotacpeted';
+
+        };
+        $client = User::FindOrFail($iduser);
+        if ($reservations->update()) {
+            $client->notify(new MailRefused());
+            return redirect('/client/events');
+            return back();
+        } else {
+            dd('error');
+        }
     }
 }

@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\AssociationController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ClientController;
+use App\Http\Controllers\WelcomController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EvenementController;
+use App\Http\Controllers\AssociationController;
 use App\Http\Controllers\AssociationSessionController;
 use App\Http\Controllers\Auth\RegisteredAssociationController;
-use App\Http\Controllers\EvenementController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,18 +20,10 @@ use App\Http\Controllers\EvenementController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-Route::get('/contact', function () {
-    return view('Contact');
-});
-Route::get('/events', function () {
-    return view('Events');
-});
-Route::get('/about', function () {
-    return view('About');
-});
+Route::get('/', [WelcomController::class, 'index']);
+Route::get('/contact', [WelcomController::class, 'contact']);
+Route::get('/events', [WelcomController::class, 'events']);
+Route::get('/about', [WelcomController::class, 'about']);
 
 Route::get('loginEntreprise', [AssociationSessionController::class, 'create'])
     ->name('loginEntreprise');
@@ -40,7 +34,10 @@ Route::get('registerEntreprise', [RegisteredAssociationController::class, 'creat
 Route::post('registerEntreprises', [RegisteredAssociationController::class, 'store'])
     ->name('Entrepriseregisters');
 Route::middleware('auth:association')->group(function () {
-   
+
+    Route::get('/declined/{iduser}/{reservation}', [EvenementController::class, 'delete']);
+    Route::get('/sowreservation/{id}', [EvenementController::class, 'show']);
+    Route::get('/viewreservation', [EvenementController::class, 'view']);
     Route::post('/send/even', [EvenementController::class, 'edit']);
     Route::get('/delete/{id}', [EvenementController::class, 'index']);
     Route::get('/update/{id}', [EvenementController::class, 'update']);
@@ -58,15 +55,13 @@ Route::middleware('auth:association')->group(function () {
 
 
 Route::middleware('client')->group(function () {
-    Route::get('dashboard', function () {
-        return view('Clients.dashboard');
-    });
+    Route::get('dashboard', [ClientController::class, 'index']);
     Route::get('/client/contact', function () {
         return view('Clients.Contact');
     });
-    Route::get('/client/events', function () {
-        return view('Clients.Events');
-    });
+    Route::get('/reservation/{id1}/{id2}', [ClientController::class, 'createeven']);
+    Route::post('/reservation', [ClientController::class, 'storeeven']);
+    Route::get('/client/events', [ClientController::class, 'Events']);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

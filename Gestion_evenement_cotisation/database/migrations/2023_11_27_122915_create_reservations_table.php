@@ -14,14 +14,16 @@ return new class extends Migration
         Schema::create('reservations', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');    
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
             $table->foreignId('evenement_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');         
-            $table->enum('accepted',['isnotacpeted','isaccepted']);
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
+            $table->string('references');
+            $table->unsignedBigInteger('nombre_place');
+            $table->enum('accepted', ['isnotacpeted', 'isaccepted']);
             $table->timestamps();
         });
     }

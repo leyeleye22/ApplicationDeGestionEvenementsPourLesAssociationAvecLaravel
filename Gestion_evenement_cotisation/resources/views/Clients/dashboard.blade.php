@@ -1,55 +1,52 @@
 @extends('Clients.navcli')
 @section('nav')
     <div class="h-screen bg-gray-50 flex items-center">
-        <section class="bg-cover bg-center py-32 w-full" style="background-image: url('https://source.unsplash.com/random');">
-            <div class="container mx-auto text-left text-white">
-                <div class="flex items-center">
-                    <div class="w-1/2">
-                        <h1 class="text-5xl font-medium mb-6">Welcome to My Agency</h1>
-                        <p class="text-xl mb-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
-                            euismod odio, gravida pellentesque urna varius vitae.</p>
-                        <a href="#"
-                            class="bg-indigo-500 text-black py-4 px-12 rounded-full hover:bg-indigo-600">Demo</a>
-                    </div>
-                    <div class="w-1/2 pl-16">
-                        <img src="https://source.unsplash.com/random?ux" class="h-64 w-full object-cover rounded-xl"
-                            alt="Layout Image">
+        @foreach ($SecondEvens as $even)
+            <section
+                class="bg-cover bg-center py-32 w-full"style="background-image: url({{ asset('images/' . $even->image) }});">
+                <div class="container mx-auto text-left text-white">
+                    <div class="flex items-center">
+                        <div class="w-1/2">
+                            <h1 class="text-5xl font-medium mb-6">Welcome to My Agency</h1>
+                            <p class="text-xl mb-12">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam viverra
+                                euismod odio, gravida pellentesque urna varius vitae.</p>
+                            <a href="#"
+                                class="bg-indigo-500 text-black py-4 px-12 rounded-full hover:bg-indigo-600">Demo</a>
+                        </div>
+                        @foreach ($thirdEvens as $even)
+                            <div class="w-1/2 pl-16">
+                                <img src="{{ asset('images/' . $even->image) }}" class="h-64 w-full object-cover rounded-xl"
+                                    alt="Layout Image">
+                            </div>
+                        @endforeach
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        @endforeach
     </div>
 @endsection
 @section('section')
     <div
         class="container flex flex-col px-6 py-4 mx-auto space-y-6 md:h-128 md:py-16 md:flex-row md:items-center md:space-x-6">
         <div class="flex flex-col items-center w-full md:flex-row md:w-1/2">
-            <div class="flex justify-center order-2 mt-6 md:mt-0 md:space-y-3 md:flex-col">
-                <button class="w-3 h-3 mx-2 bg-blue-500 rounded-full md:mx-0 focus:outline-none"></button>
-                <button class="w-3 h-3 mx-2 bg-gray-300 rounded-full md:mx-0 focus:outline-none hover:bg-blue-500"></button>
-                <button class="w-3 h-3 mx-2 bg-gray-300 rounded-full md:mx-0 focus:outline-none hover:bg-blue-500"></button>
-                <button class="w-3 h-3 mx-2 bg-gray-300 rounded-full md:mx-0 focus:outline-none hover:bg-blue-500"></button>
-            </div>
-
-            <div class="max-w-lg md:mx-12 md:order-2">
-                <h1 class="text-3xl font-medium tracking-wide text-gray-800 dark:text-white md:text-4xl">The best Apple
-                    Watch apps</h1>
-                <p class="mt-4 text-gray-600 dark:text-gray-300">Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                    Aut quia asperiores alias vero magnam recusandae adipisci ad vitae laudantium quod rem voluptatem eos
-                    accusantium cumque.</p>
-                <div class="mt-6">
-                    <a href="#"
-                        class="block px-3 py-2 font-semibold text-center text-white transition-colors duration-200 transform bg-blue-500 rounded-md md:inline hover:bg-blue-400">Download
-                        from App Store</a>
+            @foreach ($firstEvens as $even)
+                <div class="max-w-lg md:mx-12 md:order-2">
+                    <h1 class="text-3xl font-medium tracking-wide text-gray-800 dark:text-white md:text-4xl">
+                        {{ $even->libelle }}</h1>
+                    <p class="mt-4 text-gray-600 dark:text-gray-300">{{ $even->description }}</p>
+                    <div class="mt-6">
+                        <a href="#"
+                            class="block px-3 py-2 font-semibold text-center text-white transition-colors duration-200 transform bg-blue-500 rounded-md md:inline hover:bg-blue-400">Download
+                            from App Store</a>
+                    </div>
                 </div>
-            </div>
         </div>
 
         <div class="flex items-center justify-center w-full h-96 md:w-1/2">
-            <img class="object-cover w-full h-full max-w-2xl rounded-md"
-                src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1352&q=80"
+            <img class="object-cover w-full h-full max-w-2xl rounded-md" src="{{ asset('images/' . $even->image) }}"
                 alt="apple watch photo">
         </div>
+        @endforeach
     </div>
 @endsection
 @section('section2')
@@ -62,33 +59,17 @@
                     business.</p>
             </div>
             <div class="grid gap-12 items-center md:grid-cols-3">
-                <div class="space-y-4 text-center">
-                    <img class="w-64 h-64 mx-auto object-cover rounded-xl md:w-40 md:h-40 lg:w-64 lg:h-64"
-                        src="https://tailus.io/sources/blocks/classic/preview/images/woman1.jpg" alt="woman"
-                        loading="lazy" width="640" height="805">
-                    <div>
-                        <h4 class="text-2xl">Hentoni Doe</h4>
-                        <span class="block text-sm text-gray-500">CEO-Founder</span>
+                @foreach ($firstThreeEvens as $even)
+                    <div class="space-y-4 text-center">
+                        <img class="w-64 h-64 mx-auto object-cover rounded-xl md:w-40 md:h-40 lg:w-64 lg:h-64"
+                            src="{{ asset('images/' . $even->image) }}" alt="woman" loading="lazy" width="640"
+                            height="805">
+                        <div>
+                            <h4 class="text-2xl">{{ $even->libelle }}</h4>
+                            <span class="block text-sm text-gray-500">{{ $even->description }}</span>
+                        </div>
                     </div>
-                </div>
-                <div class="space-y-4 text-center">
-                    <img class="w-64 h-64 mx-auto object-cover rounded-xl md:w-48 md:h-64 lg:w-64 lg:h-80"
-                        src="https://tailus.io/sources/blocks/classic/preview/images/man.jpg" alt="man" loading="lazy"
-                        width="1000" height="667">
-                    <div>
-                        <h4 class="text-2xl">Jonathan Doe</h4>
-                        <span class="block text-sm text-gray-500">Chief Technical Officer</span>
-                    </div>
-                </div>
-                <div class="space-y-4 text-center">
-                    <img class="w-64 h-64 mx-auto object-cover rounded-xl md:w-40 md:h-40 lg:w-64 lg:h-64"
-                        src="https://tailus.io/sources/blocks/classic/preview/images/woman.jpg" alt="woman"
-                        loading="lazy" width="1000" height="667">
-                    <div>
-                        <h4 class="text-2xl">Anabelle Doe</h4>
-                        <span class="block text-sm text-gray-500">Chief Operations Officer</span>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -97,36 +78,18 @@
     <div class="py-16 bg-purple-200">
         <div class="container m-auto px-6 text-gray-500 md:px-12 xl:px-0">
             <div class="mx-auto grid gap-6 md:w-3/4 lg:w-full lg:grid-cols-3">
-                <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
-                    <div class="mb-12 space-y-4">
-                        <h3 class="text-2xl font-semibold text-purple-900">Graphic Design</h3>
-                        <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur
-                            ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
-                        <a href="#" class="block font-medium text-purple-600">Know more</a>
+                @foreach ($randomEvents as $even)
+                    <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
+                        <div class="mb-12 space-y-4">
+                            <h3 class="text-2xl font-semibold text-purple-900">{{ $even->libelle }}</h3>
+                            <p class="mb-6">{{ $even->description }}</p>
+                            <a href="#" class="block font-medium text-purple-600">Know more</a>
+                        </div>
+                        <img src="{{ asset('images/' . $even->image) }}" class="w-2/3 ml-auto -mb-12" alt="illustration"
+                            loading="lazy" width="900" height="600">
                     </div>
-                    <img src="https://tailus.io/sources/blocks/end-image/preview/images/graphic.svg"
-                        class="w-2/3 ml-auto -mb-12" alt="illustration" loading="lazy" width="900" height="600">
-                </div>
-                <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
-                    <div class="mb-12 space-y-4">
-                        <h3 class="text-2xl font-semibold text-purple-900">UI Design</h3>
-                        <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur
-                            ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
-                        <a href="#" class="block font-medium text-purple-600">Know more</a>
-                    </div>
-                    <img src="https://tailus.io/sources/blocks/end-image/preview/images/ui-design.svg" class="w-2/3 ml-auto"
-                        alt="illustration" loading="lazy" width="900" height="600">
-                </div>
-                <div class="bg-white rounded-2xl shadow-xl px-8 py-12 sm:px-12 lg:px-8">
-                    <div class="mb-12 space-y-4">
-                        <h3 class="text-2xl font-semibold text-purple-900">UX Design</h3>
-                        <p class="mb-6">Obcaecati, quam? Eligendi, nulla numquam natus laborum porro at cum, consectetur
-                            ullam tempora ipsa iste officia sed officiis! Incidunt ea animi officiis.</p>
-                        <a href="#" class="block font-medium text-purple-600">Know more</a>
-                    </div>
-                    <img src="https://tailus.io/sources/blocks/end-image/preview/images/ux-design.svg"
-                        class="w-2/3 ml-auto " alt="illustration" loading="lazy" width="900" height="600">
-                </div>
+                @endforeach
+
             </div>
         </div>
     </div>
