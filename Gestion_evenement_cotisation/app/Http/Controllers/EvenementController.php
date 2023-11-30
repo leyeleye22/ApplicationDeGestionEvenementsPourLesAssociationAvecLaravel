@@ -118,16 +118,13 @@ class EvenementController extends Controller
         $reservations = Reservation::where('id', $reservation)->where('user_id', $iduser)->firstOrFail();
         if ($reservations->accepted == 'isnotacpeted') {
             $reservations->accepted = 'isaccepted';
-
         } else {
             $reservations->accepted = 'isnotacpeted';
-
         };
         $client = User::FindOrFail($iduser);
         if ($reservations->update()) {
             $client->notify(new MailRefused());
             return redirect('/client/events');
-            return back();
         } else {
             dd('error');
         }
