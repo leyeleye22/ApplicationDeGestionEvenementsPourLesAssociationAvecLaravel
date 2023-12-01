@@ -36,8 +36,8 @@
                     <p class="mt-4 text-gray-600 dark:text-gray-300">{{ $even->description }}</p>
                     <div class="mt-6">
                         <a href="#"
-                            class="block px-3 py-2 font-semibold text-center text-white transition-colors duration-200 transform bg-blue-500 rounded-md md:inline hover:bg-blue-400">Download
-                            from App Store</a>
+                            class="block px-3 py-2 font-semibold text-center text-white transition-colors duration-200 transform bg-blue-500 rounded-md md:inline hover:bg-blue-400">Read
+                            More</a>
                     </div>
                 </div>
         </div>
