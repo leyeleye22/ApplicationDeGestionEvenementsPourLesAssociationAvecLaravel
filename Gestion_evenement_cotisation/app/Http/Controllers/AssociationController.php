@@ -7,6 +7,7 @@ use App\Models\Evenement;
 use App\Models\Association;
 use Illuminate\Http\Request;
 use App\Notifications\MailEven;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreAssociationRequest;
 use App\Http\Requests\UpdateAssociationRequest;
 
@@ -25,8 +26,8 @@ class AssociationController extends Controller
      */
     public function create()
     {
-        $evens = Evenement::all();
-        // dd($evens);
+        $evens = Evenement::where('association_id', Auth::guard('association')->user()->id)->get();
+
         return view('Company.dashboard', compact('evens'));
     }
 

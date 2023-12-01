@@ -18,10 +18,12 @@ class WelcomController extends Controller
     }
     public function events()
     {
-        return view('Events');
+        $evens = Evenement::all();
+        return view('Events', compact('evens'));
     }
     public function about()
     {
-        return view('About');
+        $evens = Evenement::inRandomOrder()->take(1)->get();
+        return view('About', compact('evens'));
     }
 }
