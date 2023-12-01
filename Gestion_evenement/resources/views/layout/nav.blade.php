@@ -6,6 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Document</title>
 </head>
 
@@ -45,16 +47,14 @@
                 @else
                     <div
                         class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <a href="{{ route('login') }}"
-                            class="bg-green-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                            aria-current="page">Se
-                            Connecter</a>
-
+                        <a href="" class="bg-green-900 text-white rounded-md px-3 py-2 text-sm font-medium"
+                            aria-current="page" data-bs-toggle="modal" data-bs-target="#loginModal">Se Connecter</a>
                         <div class="relative ml-3">
                             <div>
-                                <a href="{{ route('register') }}"
+                                <a href=""
                                     class="bg-green-900 text-white rounded-md px-3 py-2 text-sm font-medium"
-                                    aria-current="page">S'inscrire</a>
+                                    aria-current="page" data-bs-toggle="modal"
+                                    data-bs-target="#registerModal">S'inscrire</a>
                             </div>
                         </div>
                     </div>
@@ -62,6 +62,51 @@
             </div>
         </div>
     </nav>
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Connexion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Vous êtes?</h3>
+                    <br>
+                    <a href="{{ route('login') }}" class="btn btn-secondary offset-1">Client</a>
+                    <a href="{{ route('loginEntreprise') }}" class="btn btn-warning offset-2">Association</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Inscription</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <h3>Vous êtes?</h3>
+                    <br>
+                    <a href="{{ route('register') }}" class="btn btn-secondary offset-1">Client</a>
+                    <a href="{{ route('Entrepriseregister') }}" class="btn btn-warning offset-2">Association</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous">
+    </script>
     @yield('nav')
     @yield('footer')
     <footer class="w-full text-gray-700 bg-gray-100 body-font">
@@ -96,7 +141,8 @@
                         <a class="ml-3 text-gray-500 cursor-pointer hover:text-gray-700">
                             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                 stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
-                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5">
+                                </rect>
                                 <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
                             </svg>
                         </a>
